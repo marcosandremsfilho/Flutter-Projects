@@ -14,3 +14,13 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+var darkTheme = ThemeData(
+  primarySwatch: Colors.red,
+  brightness: Brightness.dark,
+);
+
+var lightTheme = ThemeData(
+  primarySwatch: Colors.blue,
+  brightness: Brightness.dark,
+);

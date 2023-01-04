@@ -19,14 +19,15 @@ class Login extends StatelessWidget {
               const SizedBox(height: 10),
               Image.asset('assets/images/UAIRRIOR.png', scale: 13, height: 100),
               const TextField(
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
-                    hintText: 'Email', prefixIcon: Icon(Icons.email)),
+                    labelText: 'Email', prefixIcon: Icon(Icons.email)),
               ),
               const SizedBox(height: 10),
               const TextField(
                 obscureText: true,
                 decoration: InputDecoration(
-                    hintText: 'Senha', prefixIcon: Icon(Icons.lock)),
+                    labelText: 'Senha', prefixIcon: Icon(Icons.lock)),
               ),
               const SizedBox(height: 10),
               Row(
@@ -61,7 +62,7 @@ class Login extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const Register()));
+                                builder: (context) => Register()));
                       },
                       child: const Text('Register'),
                     ),
