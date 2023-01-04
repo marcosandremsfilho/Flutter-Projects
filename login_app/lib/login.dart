@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import './register.dart';
 
-class Login extends StatelessWidget {
-  const Login({super.key});
+class Login extends StatefulWidget {
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  bool isPasswordVisible = true;
 
   @override
   Widget build(BuildContext context) {
@@ -24,18 +29,29 @@ class Login extends StatelessWidget {
                     labelText: 'Email', prefixIcon: Icon(Icons.email)),
               ),
               const SizedBox(height: 10),
-              const TextField(
-                obscureText: true,
+              TextField(
+                obscureText: isPasswordVisible,
+                autocorrect: false,
                 decoration: InputDecoration(
-                    labelText: 'Senha', prefixIcon: Icon(Icons.lock)),
+                  labelText: 'Senha',
+                  prefixIcon: const Icon(Icons.lock),
+                  suffixIcon: IconButton(
+                    icon: isPasswordVisible
+                        ? const Icon(Icons.visibility)
+                        : const Icon(Icons.visibility_off),
+                    onPressed: () {
+                      setState(() {
+                        isPasswordVisible = !isPasswordVisible;
+                      });
+                    },
+                  ),
+                ),
               ),
               const SizedBox(height: 10),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(
-                    height: 10,
-                    width: 70,
-                  ),
                   SizedBox(
                     width: 100,
                     child: ElevatedButton(
@@ -47,10 +63,7 @@ class Login extends StatelessWidget {
                       child: const Text('Login'),
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                    width: 10,
-                  ),
+                  const SizedBox(width: 10),
                   SizedBox(
                     width: 100,
                     child: ElevatedButton(

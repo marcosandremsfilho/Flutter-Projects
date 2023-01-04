@@ -12,6 +12,9 @@ class _RegisterState extends State<Register> {
   final confirmPasswordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
+  bool isPassWordVisible = true;
+  bool isConfirmPassWordVisible = true;
+
   bool teste(String pass, String confirmPass) {
     if (pass == confirmPass) {
       return true;
@@ -50,22 +53,44 @@ class _RegisterState extends State<Register> {
                     ),
                     const SizedBox(height: 10),
                     TextFormField(
-                      obscureText: true,
+                      obscureText: isPassWordVisible,
                       autocorrect: false,
                       controller: passwordController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: 'Senha',
-                        prefixIcon: Icon(Icons.lock),
+                        prefixIcon: const Icon(Icons.lock),
+                        suffixIcon: IconButton(
+                          icon: isPassWordVisible
+                              ? const Icon(Icons.visibility)
+                              : const Icon(Icons.visibility_off),
+                          onPressed: () {
+                            setState(() {
+                              isPassWordVisible = !isPassWordVisible;
+                            });
+                          },
+                        ),
                       ),
                     ),
                     const SizedBox(height: 10),
                     TextFormField(
-                        obscureText: true,
+                        obscureText: isConfirmPassWordVisible,
                         autocorrect: false,
                         controller: confirmPasswordController,
-                        decoration: const InputDecoration(
-                            labelText: 'Repetir Senha',
-                            prefixIcon: Icon(Icons.lock)),
+                        decoration: InputDecoration(
+                          labelText: 'Repetir Senha',
+                          prefixIcon: const Icon(Icons.lock),
+                          suffixIcon: IconButton(
+                            icon: isConfirmPassWordVisible
+                                ? const Icon(Icons.visibility)
+                                : const Icon(Icons.visibility_off),
+                            onPressed: () {
+                              setState(() {
+                                isConfirmPassWordVisible =
+                                    !isConfirmPassWordVisible;
+                              });
+                            },
+                          ),
+                        ),
                         validator: ((value) {
                           if (passwordController.text !=
                               confirmPasswordController.text) {
@@ -73,12 +98,11 @@ class _RegisterState extends State<Register> {
                           }
                           return null;
                         })),
+                    const SizedBox(height: 10),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const SizedBox(
-                          height: 50,
-                          width: 50,
-                        ),
                         SizedBox(
                           width: 100,
                           child: ElevatedButton(
@@ -90,25 +114,20 @@ class _RegisterState extends State<Register> {
                                 if (formKey.currentState!.validate()) {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(const SnackBar(
-                                    content: const Text(
-                                        "Cadastro feito com sucesso"),
+                                    content: Text("Cadastro feito com sucesso"),
                                     backgroundColor: Colors.green,
                                   ));
                                 } else {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(const SnackBar(
-                                    content:
-                                        const Text("Senhas não compatíveis"),
+                                    content: Text("Senhas não compatíveis"),
                                     backgroundColor: Colors.red,
                                   ));
                                 }
                               },
                               child: const Text('Register')),
                         ),
-                        const SizedBox(
-                          height: 20,
-                          width: 10,
-                        ),
+                        const SizedBox(width: 10),
                         SizedBox(
                           width: 100,
                           child: ElevatedButton(
@@ -120,7 +139,7 @@ class _RegisterState extends State<Register> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => const Login()));
+                                        builder: (context) => Login()));
                               },
                               child: const Text('Cancel')),
                         ),
