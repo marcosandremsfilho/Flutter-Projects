@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_app/homePage.dart';
 import './register.dart';
 
 class Login extends StatefulWidget {
@@ -59,7 +60,12 @@ class _LoginState extends State<Login> {
                         backgroundColor: Colors.blue,
                         foregroundColor: Colors.white,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomePage()));
+                      },
                       child: const Text('Login'),
                     ),
                   ),
