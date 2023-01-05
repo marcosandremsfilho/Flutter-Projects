@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login_app/login.dart';
+import './login.dart';
+import './marketPage.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -21,7 +22,10 @@ class homePage extends State<HomePage> {
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           IconButton(
             icon: const Icon(Icons.shopping_cart),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => MarketPage()));
+            },
             color: Colors.blue,
             iconSize: 50.0,
           ),
